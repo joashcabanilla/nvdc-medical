@@ -12,4 +12,12 @@ class GuestController extends Controller{
 function Index(){
 return view("Components.Userlogin");
  }   
+function register(){
+return view("Components.register");
+ }   
+
 }
+
+
+
+
