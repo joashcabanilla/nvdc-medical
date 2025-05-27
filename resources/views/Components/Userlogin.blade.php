@@ -1,57 +1,71 @@
 @extends('Layouts.Login')
 @section('content')
 
- <div class="container-login hold-transition login-page">
-        <div class="login-box">
-            <div class="card card-outline card-primary">
-                <div class="card-header text-center">
-                    <img src="{{asset('image/1.png')}}" alt="logo" width="250" />
-                    <div class="alert alert-danger mt-2 mb-0 error-text d-none font-weight-bold" role="alert">
-                        text message error
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="container-login hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <img src="{{ asset('image/1.png') }}" alt="logo" width="250" />
+                <div class="alert alert-danger mt-2 mb-0 error-text d-none font-weight-bold" role="alert">
+                    text message error
+                </div>
+            </div>
+            <div class="card-body">
+                <h5><b>Login to Account</b></h5>
+                <h6 class="mb-4">Enter your credentials to access your account.</h6>
+
+                <form id="loginForm" method="POST">
+                    @csrf
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" id="username" name="username" required autofocus>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h5> 
-                        <b>Login to Account</b> 
-                        <h6>Enter Your credentials to access your account.</h6>
-                    </h5>
-                    <form id="loginForm" method="POST">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username" id="username" name="username" autocomplete="false" required autofocus>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
+
+                    <div class="input-group mb-2">
+                        <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="fas fa-eye-slash" id="togglePassword" style="cursor: pointer; transition: 0.2s;"></i>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="input-group mb-0">
-                            <input type="password" class="form-control" placeholder="Password" id="password" name="password" autocomplete="false" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="form-group text-right">
+                        <a href="#" class="text-secondary font-weight-bold">Forgot Password?</a>
+                    </div>
 
-                        <div class="row p-0 mt-1">
-                            <div class="col-12">
-                                <div class="icheck-success">
-                                    <input type="checkbox" id="showPassword" name="showpassword">
-                                    <label for="showPassword">Show password</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block font-weight-bold">Sign In</button>
+                    </div>
 
-                        <div class="row mt-3">
-                             <div class="col-12 d-flex justify-content-center">
-                              <button type="submit" class="btn btn-primary btn-block font-weight-bold w-75">Sign In</button>
-                             </div>
-                        </div>
-                    </form>
-                </div>
+                    <div class="text-center mt-3">
+                        <span>Don’t have an account yet? <a href="#" class="text-success font-weight-bold">Register</a></span>
+                        <hr style="margin: 1rem 0; border-top: 1px solid #ccc;" />
+                        <a href="#" class="text-primary font-weight-bold" style="cursor:pointer;">Check Application Status</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+{{-- Password toggle script --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+
+            // Toggle icon correctly
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    });
+</script>
 
 @endsection
