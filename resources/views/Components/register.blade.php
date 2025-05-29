@@ -1,7 +1,7 @@
 @extends('Layouts.Login')
 @section('content')
 
-<div class="container-login hold-transition login-page">
+<div class="container-login hold-transition login-page mt-5">
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -14,12 +14,21 @@
                 <h5><b>Register Here</b></h5>
                 <h6 class="mb-4">Enter your credentials to access your account.</h6>
 
-                <form id="loginForm" method="POST">
+                <form id="registrationForm" method="POST" action="{{ route('user.postRegister') }}">
                     @csrf
 
                     {{-- Additional Fields --}}
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Middle Name" name="middle_name" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -37,6 +46,15 @@
                     </div>
 
                     <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" name="username" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email Address" name="email" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -46,30 +64,30 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <textarea class="form-control" placeholder="Physical Address" name="address" rows="2" required></textarea>
+                        <input type="tel" class="form-control" placeholder="Contact Number" name="contact_number" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-map-marker-alt"></span>
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="fas fa-eye-slash" id="togglePassword" style="cursor: pointer; transition: 0.2s;"></i>
                             </div>
                         </div>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" name="dob" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-calendar-alt"></span>
-                            </div>
-                        </div>
-                    </div>
+                  
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-success btn-block font-weight-bold">Register</button>
                     </div>
 
-                    <div class="text-center mt-3">
-                        <span>Don’t have an account yet? <a href="#" class="text-success font-weight-bold">Register</a></span>
-                    </div>
                 </form>
             </div>
         </div>

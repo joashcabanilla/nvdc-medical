@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 
-class MemberMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,12 @@ class MemberMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is logged in and is a Member (UserType ID = 1)
-        if (Auth::check() && Auth::user()->UserType == 1) {
+        // Allow only Doctor (2), or Admin (3)
+        if (Auth::check() && Auth::user()->UserType != 1) {
             return $next($request);
         }
 
-        // If not a Member, redirect to login or unauthorized page
-        return redirect('/')->with('error', 'Unauthorized access.');
+        // Deny access if user is Member (1)
+        return redirect('/login')->with('error', 'Access denied.');
     }
 }

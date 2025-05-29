@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if(Auth::user()->UserType == 5){
+                if(Auth::user()->UserType == 1){
                     return redirect('member');
                 }else{
                     return redirect('admin');

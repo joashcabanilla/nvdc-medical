@@ -16,9 +16,10 @@
                 <h5><b>Login to Account</b></h5>
                 <h6 class="mb-4">Enter your credentials to access your account.</h6>
 
-                <form id="loginForm" method="POST">
-                    @csrf
+                <form id="loginForm2" method="POST" action="{{ route('user.postLogin') }}">
 
+                    @csrf
+            
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" id="username" name="username" required autofocus>
                     </div>
@@ -41,7 +42,7 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <span>Don’t have an account yet? <a href="#" class="text-success font-weight-bold">Register</a></span>
+                        <span>Don’t have an account yet? <a href="{{ route('user.register') }}" class="text-success font-weight-bold">Register</a></span>
                         <hr style="margin: 1rem 0; border-top: 1px solid #ccc;" />
                         <a href="#" class="text-primary font-weight-bold" style="cursor:pointer;">Check Application Status</a>
                     </div>
@@ -51,21 +52,6 @@
     </div>
 </div>
 
-{{-- Password toggle script --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
 
-        togglePassword.addEventListener('click', function () {
-            const isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
-
-            // Toggle icon correctly
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-    });
-</script>
 
 @endsection

@@ -155,5 +155,7 @@
     </script>
     
     {{--script for page --}}
+    <script src="{{asset('js/login.js')}}?{{ filemtime(public_path('js/login.js'))}}"></script>
 
+    
 </html>
