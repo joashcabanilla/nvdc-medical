@@ -28,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const UPDATED_AT = 'updated_at';
 
     protected $fillable = [
-        'User_type', 
+        'UserType', 
         'FirstName',
         'MiddleName',
         'LastName',
@@ -67,12 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail
         $user = $this->where('Username', $data->username)
                     ->orWhere('email', $data->username)
                     ->first();
-        
+              
                     if(Hash::check($data->password,$user->password)){
                         Auth::login($user,true);
+                    }
     }
     
-}
     // Add this method to your User model
     public function getAuthIdentifierName()
     {

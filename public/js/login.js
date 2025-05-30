@@ -1,6 +1,6 @@
-$("#loginForm").submit((e) => {
+$("#loginForm,#loginForm2").submit((e) => {
     e.preventDefault();
-
+    console.log("uytyy");
     $.ajax({
         type: "POST",
         url: "login", // Ensure this route exists in web.php
@@ -9,7 +9,7 @@ $("#loginForm").submit((e) => {
             // Redirect user based on role or success
             if (res.status === "success") {
                 if (res.redirect_url) {
-                    window.location.href = res.redirect_url;
+                    location.reload();
                 }
             } else {
                 $(".error-text").removeClass("d-none").text(res.message || "Invalid credentials.");

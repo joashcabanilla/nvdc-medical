@@ -15,7 +15,9 @@
             <div class="card-body">
                 <h5><b>Login to Account</b></h5>
                 <h6 class="mb-4">Enter your credentials to access your account.</h6>
-
+                @if(Auth::check())
+                <h6 class="mb-4">{{Auth::user()->FirstName}}</h6>
+                @endif
                 <form id="loginForm2" method="POST" action="{{ route('user.postLogin') }}">
 
                     @csrf

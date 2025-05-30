@@ -15,14 +15,14 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        // Allow only Doctor (2), or Admin (3)
-        if (Auth::check() && Auth::user()->UserType != 1) {
+        // Allow if user is admin or doctor
+        if (Auth::check() && (Auth::user()->UserType == 2 || Auth::user()->UserType == 3)) {
             return $next($request);
         }
 
-        // Deny access if user is Member (1)
-        return redirect('/login')->with('error', 'Access denied.');
+        // Otherwise redirect to login or show 403
+        return redirect()->route('admin.login');
     }
 }

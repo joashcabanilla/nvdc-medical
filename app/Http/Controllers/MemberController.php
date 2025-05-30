@@ -8,3 +8,8 @@ use Illuminate\Support\Facades\Auth;
 //Model
 use App\Models\User;
 
+class MemebrController extends Controller{
+function LandingPage(){
+  
+}
+}

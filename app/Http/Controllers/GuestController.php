@@ -15,7 +15,7 @@ class GuestController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except(['logout']);
+        $this->middleware('guest');
     }
 
     function Index(){
@@ -31,33 +31,34 @@ class GuestController extends Controller
     }
 
     function postLogin(Request $request)
-{
-    $user = new User();
-    $user->login($request->all());
+    {
+        $user = new User();
+        $user->login($request->all());
 
-    if (Auth::check()) {
-        $redirect = Auth::user()->User_type == 1 ? '/member' : '/admin';
+        if (Auth::check()) {
+            $redirect = Auth::user()->UserType == 1 ? '/member' : '/admin';
+
+            return response()->json([
+                'status' => 'success',
+                'redirect_url' => $redirect
+            ]);
+        }
 
         return response()->json([
-            'status' => 'success',
-            'redirect_url' => $redirect
+            'status' => 'error',
+            'message' => 'Invalid credentials.'
         ]);
     }
 
-    return response()->json([
-        'status' => 'error',
-        'message' => 'Invalid credentials.'
-    ]);
-}
 
-
-public function postRegister(Request $request)
+    public function postRegister(Request $request)
 {
     $rules = [
         'first_name' => ['required', 'string', 'min:2'],
         'last_name' => ['required', 'string', 'min:1'],
-        'email' => ['required', 'string', 'min:3', 'unique:users,email'],
+        'email' => ['required', 'string', 'min:3', 'unique:users'],
         'password' => ['required', 'string', 'min:2'],
+        "username" => ["required","string","min:5","unique:users"]
     ];
 
     $validator = Validator::make($request->all(), $rules);
@@ -70,7 +71,7 @@ public function postRegister(Request $request)
     }
 
     User::create([
-        "User_type" => 1,
+        "UserType" => 1,
         "FirstName" => $request->first_name,
         "MiddleName" => $request->middle_name,
         "LastName" => $request->last_name,
@@ -87,11 +88,11 @@ public function postRegister(Request $request)
 }
     
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');
-    }
+    // public function logout(Request $request)
+    // {
+    //     Auth::logout();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+    //     return redirect('/');
+    // }
 }

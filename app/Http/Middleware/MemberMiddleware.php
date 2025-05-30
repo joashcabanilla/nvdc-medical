@@ -17,6 +17,8 @@ class MemberMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
+
         // Check if the user is logged in and is a Member (UserType ID = 1)
         if (Auth::check() && Auth::user()->UserType == 1) {
             return $next($request);

@@ -30,7 +30,7 @@ Route::middleware(['guest'])->group(function () {
 // Member Routes (Authenticated + Member Role Only)
 Route::prefix('member')->middleware(['auth', 'member'])->group(function () {
     // GET Routes
-    Route::get('/landingpage', [MemberController::class, 'LandingPage'])->name('member.landing');
+    Route::get('/', [MemberController::class, 'LandingPage'])->name('member.landing');
     Route::get('/appointment', [MemberController::class, 'Appointment'])->name('member.appointment');
 
     // Optional: Direct route for dashboard

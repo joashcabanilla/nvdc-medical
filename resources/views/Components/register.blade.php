@@ -17,7 +17,6 @@
                 <form id="registrationForm" method="POST" action="{{ route('user.postRegister') }}">
                     @csrf
 
-                    {{-- Additional Fields --}}
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
                         <div class="input-group-append">
